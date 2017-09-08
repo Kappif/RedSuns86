@@ -1,0 +1,13 @@
+#!/bin/bash
+readOne () {
+    local oldstty
+    oldstty=$(stty -g)
+    stty -icanon -echo min 1 time 0
+    dd bs=1 count=1 2>/dev/null
+    stty "$oldstty"
+}
+
+while true; do
+char=$(readOne)
+echo $char
+done

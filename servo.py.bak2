@@ -1,0 +1,62 @@
+# Servo Control
+import time
+import wiringpi
+
+# set the PWM mode to milliseconds stype
+wiringpi.pwmSetMode(wiringpi.GPIO.PWM_MODE_MS)
+PIN_TO_PWM = 23
+PIN_TO_PWM2 = 24
+
+wiringpi.wiringPiSetupGpio()
+OUTPUT = 1
+val = 15
+wiringpi.pinMode(PIN_TO_PWM,OUTPUT)
+wiringpi.softPwmCreate(PIN_TO_PWM,15,25)
+wiringpi.pinMode(PIN_TO_PWM2,OUTPUT)
+wiringpi.softPwmCreate(PIN_TO_PWM2,14,25)
+
+#wiringpi.softPwmWrite(PIN_TO_PWM, 15)
+#wiringpi.softPwmWrite(PIN_TO_PWM2, 15)
+
+
+# set the PWM mode to milliseconds stype
+while True:
+	try:
+#		val = 0
+			
+
+		valn=raw_input()
+
+		if (valn!=val):
+			val = valn
+		
+		speed1=5
+		speed2=25
+		if (val == "a"):
+
+			for brightness in range(15,25):
+                        	wiringpi.softPwmWrite(PIN_TO_PWM,brightness) # Ch$
+                      	  	wiringpi.delay(20)
+		if (val == "d"):
+
+                        for brightness in reversed(range(5,15)):
+                                wiringpi.softPwmWrite(PIN_TO_PWM,brightness)
+                                wiringpi.delay(20)
+		if (val == "w"):
+
+                        for brightness in range(15,25):
+                                wiringpi.softPwmWrite(PIN_TO_PWM2,brightness)
+                                wiringpi.delay(10)
+		if (val == "s"):
+
+                        for brightness in reversed(range(5,15)):
+                                wiringpi.softPwmWrite(PIN_TO_PWM2,brightness)
+                                wiringpi.delay(10)
+
+
+
+
+
+	finally:
+	        wiringpi.softPwmWrite(PIN_TO_PWM,15)
+		wiringpi.softPwmWrite(PIN_TO_PWM2,14)

@@ -1,0 +1,4 @@
+RPi.GPIO as GPIO
+s
+time
+wiringpi
